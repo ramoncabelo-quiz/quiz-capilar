@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnóstico Capilar - Ramon Araújo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* LANDING PAGE STYLES */
+        #landingPage {
+            background: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .landing-container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .logo-area {
+            margin-bottom: 30px;
+        }
+
+        .logo-emoji {
+            font-size: 80px;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 4px 8px rgba(212, 175, 122, 0.3));
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .landing-container h1 {
+            font-size: 48px;
+            font-weight: 800;
+            color: #000000;
+            margin-bottom: 25px;
+            line-height: 1.2;
+        }
+
+        .landing-subtitle {
+            font-size: 20px;
+            color: #333333;
+            line-height: 1.7;
+            margin-bottom: 50px;
+            font-weight: 400;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .start-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #d4af7a 0%, #b8935a 100%);
+            color: #000000;
+            padding: 22px 55px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 20px;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(212, 175, 122, 0.4);
+            border: none;
+            cursor: pointer;
+        }
+
+        .start-button:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(212, 175, 122, 0.5);
+        }
+
+        /* LEAD FORM STYLES */
+        #leadFormPage {
+            background: linear-gradient(135deg, #f8f9fa 0%, #faf8f5 100%);
+            display: none;
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        .form-container {
+            max-width: 500px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 50px 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            margin: 0 auto;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .form-header h2 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #2d2d2d;
+            margin-bottom: 10px;
+        }
+
+        .form-header p {
+            font-size: 15px;
+            color: #6b6b6b;
+            font-weight: 300;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #2d2d2d;
+            margin-bottom: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px 18px;
+            border: 2px solid #f0f0f0;
+            border-radius: 12px;
+            font-size: 16px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #d4af7a;
+            background: #ffffff;
+        }
+
+        .submit-button {
+            width: 100%;
+            background: linear-gradient(135deg, #d4af7a 0%, #b8935a 100%);
+            color: white;
+            padding: 18px;
+            border-radius: 12px;
+            border: none;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 122, 0.3);
+            margin-top: 10px;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 122, 0.4);
+        }
+
+        .submit-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .privacy-text {
+            font-size: 12px;
+            color: #999;
+            text-align: center;
+            margin-top: 20px;
+            line-height: 1.5;
+        }
+
+        /* QUIZ STYLES */
+        #quizPage {
+            background: linear-gradient(135deg, #f8f9fa 0%, #faf8f5 100%);
+            display: none;
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        .quiz-container {
+            max-width: 600px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 50px 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #2d2d2d;
+            margin-bottom: 15px;
+        }
+
+        .header p {
+            font-size: 16px;
+            color: #6b6b6b;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .question {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .question.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .question-title {
+            font-size: 20px;
+            font-weight: 500;
+            color: #2d2d2d;
+            margin-bottom: 25px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            background: #fafafa;
+            border: 2px solid #f0f0f0;
+            border-radius: 12px;
+            padding: 18px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            color: #4a4a4a;
+        }
+
+        .option:hover {
+            border-color: #d4af7a;
+            background: #fef9f3;
+            transform: translateX(5px);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #d4af7a 0%, #b8935a 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .result {
+            display: none;
+            text-align: center;
+        }
+
+        .result.active {
+            display: block;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .result h2 {
+            font-size: 26px;
+            font-weight: 600;
+            color: #2d2d2d;
+            margin-bottom: 20px;
+        }
+
+        .result p {
+            font-size: 16px;
+            color: #6b6b6b;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .result .tip {
+            background: #fef9f3;
+            border-left: 4px solid #d4af7a;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            text-align: left;
+        }
+
+        .result .tip strong {
+            color: #b8935a;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #d4af7a 0%, #b8935a 100%);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 122, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 122, 0.4);
+        }
+
+        .emoji {
+            font-size: 32px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .landing-container h1 {
+                font-size: 36px;
+            }
+
+            .landing-subtitle {
+                font-size: 18px;
+            }
+
+            .logo-emoji {
+                font-size: 64px;
+            }
+
+            .start-button {
+                padding: 20px 45px;
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .quiz-container, .form-container {
+                padding: 40px 25px;
+            }
+
+            .header h1, .form-header h2 {
+                font-size: 24px;
+            }
+
+            .question-title {
+                font-size: 18px;
+            }
+
+            .landing-container h1 {
+                font-size: 28px;
+            }
+
+            .landing-subtitle {
+                font-size: 16px;
+            }
+
+            .logo-emoji {
+                font-size: 52px;
+            }
+
+            .start-button {
+                padding: 18px 35px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- LANDING PAGE -->
+    <div id="landingPage">
+        <div class="landing-container">
+            <div class="logo-area">
+                <span class="logo-emoji">✨</span>
+            </div>
+
+            <h1>Descubra Seu Tipo de Cabelo</h1>
+            
+            <p class="landing-subtitle">
+                Oi, Sou o Ramon! Eu e minha equipe fizemos algo que em menos de 2 minutos você vai descobrir o seu tipo de cabelo para deixá-lo mais bonito, forte e saudável.
+            </p>
+
+            <button class="start-button" onclick="showLeadForm()">
+                Vamos começar?
+            </button>
+        </div>
+    </div>
+
+    <!-- LEAD FORM PAGE -->
+    <div id="leadFormPage">
+        <div class="form-container">
+            <div class="form-header">
+                <h2>Antes de começar...</h2>
+                <p>Preencha seus dados para receber o resultado do diagnóstico</p>
+            </div>
+
+            <form id="leadForm" onsubmit="submitLead(event)">
+                <div class="form-group">
+                    <label>Nome completo *</label>
+                    <input type="text" id="nome" name="nome" required placeholder="Digite seu nome">
+                </div>
+
+                <div class="form-group">
+                    <label>E-mail *</label>
+                    <input type="email" id="email" name="email" required placeholder="seuemail@exemplo.com">
+                </div>
+
+                <div class="form-group">
+                    <label>Telefone (WhatsApp) *</label>
+                    <input type="tel" id="telefone" name="telefone" required placeholder="(00) 00000-0000">
+                </div>
+
+                <button type="submit" class="submit-button" id="submitBtn">
+                    Continuar para o Diagnóstico
+                </button>
+
+                <p class="privacy-text">
+                    Seus dados estão seguros conosco. Usaremos apenas para enviar dicas personalizadas de cuidados capilares.
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- QUIZ PAGE -->
+    <div id="quizPage">
+        <div class="quiz-container">
+            <div class="header">
+                <h1>Descubra Seu Tipo de Cabelo</h1>
+                <p>Oi, descubra em menos de 1 minuto o seu tipo de cabelo para deixá-lo mais bonito, forte e saudável. 🌟 Vamos começar? </p>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <div id="quizContainer">
+                <div class="question active" data-question="1">
+                    <h2 class="question-title">Como você descreveria seu cabelo natural (sem escova ou química)?</h2>
+                    <div class="options">
+                        <div class="option" data-value="liso">Liso</div>
+                        <div class="option" data-value="ondulado">Ondulado</div>
+                        <div class="option" data-value="cacheado">Cacheado</div>
+                        <div class="option" data-value="crespo">Crespo</div>
+                    </div>
+                </div>
+
+                <div class="question" data-question="2">
+                    <h2 class="question-title">Qual é a sua principal queixa hoje?</h2>
+                    <div class="options">
+                        <div class="option" data-value="ressecamento">Ressecamento</div>
+                        <div class="option" data-value="oleosidade">Oleosidade</div>
+                        <div class="option" data-value="quebra">Quebra</div>
+                        <div class="option" data-value="frizz">Frizz</div>
+                        <div class="option" data-value="sem-brilho">Sem brilho</div>
+                    </div>
+                </div>
+
+                <div class="question" data-question="3">
+                    <h2 class="question-title">Com que frequência você lava o cabelo?</h2>
+                    <div class="options">
+                        <div class="option" data-value="todos-dias">Todos os dias</div>
+                        <div class="option" data-value="2-dias">A cada 2 dias</div>
+                        <div class="option" data-value="2x-semana">2x por semana</div>
+                        <div class="option" data-value="1x-semana">1x por semana</div>
+                    </div>
+                </div>
+
+                <div class="question" data-question="4">
+                    <h2 class="question-title">Você usa química, coloração ou alisamento?</h2>
+                    <div class="options">
+                        <div class="option" data-value="sim">Sim</div>
+                        <div class="option" data-value="nao">Não</div>
+                    </div>
+                </div>
+
+                <div class="question" data-question="5">
+                    <h2 class="question-title">Você costuma fazer hidratação ou nutrição em casa?</h2>
+                    <div class="options">
+                        <div class="option" data-value="sempre">Sim, sempre</div>
+                        <div class="option" data-value="as-vezes">Às vezes</div>
+                        <div class="option" data-value="quase-nunca">Quase nunca</div>
+                    </div>
+                </div>
+
+                <div class="question" data-question="6">
+                    <h2 class="question-title">Qual é o seu objetivo principal agora?</h2>
+                    <div class="options">
+                        <div class="option" data-value="fortes-brilhantes">Cabelos mais fortes e brilhantes</div>
+                        <div class="option" data-value="oleosidade">Controlar a oleosidade</div>
+                        <div class="option" data-value="cachos">Definir os cachos</div>
+                        <div class="option" data-value="frizz">Reduzir o frizz</div>
+                        <div class="option" data-value="recuperar">Recuperar fios danificados</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="resultContainer"></div>
+        </div>
+    </div>
+
+    <script>
+        // ===== SUBSTITUA ESTA URL PELA URL DO SEU GOOGLE APPS SCRIPT =====
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyiWdbNFjjo0z0DuNe6ZjTaXK6jVMmItYzeyHSbQkZyq_CUyuRrrtmlyPYuRDAmD6oe/exec';
+        // =================================================================
+
+        const leadData = {};
+        const answers = {};
+        let currentQuestion = 1;
+        const totalQuestions = 6;
+
+        const results = {
+            quimica: {
+                emoji: '🌞',
+                title: 'Quimicamente Tratado',
+                description: '✨ Seu cabelo tem química ou coloração. Ele precisa de reconstrução leve e proteção térmica.',
+                tip: '💡 Dica: use protetor térmico antes de pranchar.'
+            },
+            liso: {
+                emoji: '🌿',
+                title: 'Liso com Oleosidade',
+                description: '✨ Seu cabelo é liso e tende à oleosidade. Ele precisa de limpeza equilibrada e produtos leves que controlem o brilho sem ressecar.',
+                tip: '💡 Dica: evite aplicar condicionador na raiz e lave com água morna.'
+            },
+            ondulado: {
+                emoji: '🌸',
+                title: 'Ondulado com Frizz',
+                description: '🌿 Seu cabelo é ondulado e com tendência ao frizz. Ele precisa de hidratação leve e nutrição regular.',
+                tip: '💡 Dica: finalize amassando as pontas com creme e evite pentear seco.'
+            },
+            cacheado: {
+                emoji: '🌺',
+                title: 'Cacheado Ressecado',
+                description: '💖 Seu cabelo é cacheado e ressecado. Ele precisa de hidratação profunda e um cronograma capilar leve.',
+                tip: '💡 Dica: use touca de cetim e faça pré-shampoo 1x por semana.'
+            },
+            crespo: {
+                emoji: '🌻',
+                title: 'Crespo com Quebra',
+                description: '🌟 Seu cabelo é crespo e frágil. Ele precisa de nutrição intensa e reconstrução semanal.',
+                tip: '💡 Dica: use óleos vegetais nas pontas e evite secador excessivo.'
+            }
+        };
+
+        function showLeadForm() {
+            document.getElementById('landingPage').style.display = 'none';
+            document.getElementById('leadFormPage').style.display = 'flex';
+        }
+
+        async function submitLead(event) {
+            event.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Enviando...';
+
+            leadData.nome = document.getElementById('nome').value;
+            leadData.email = document.getElementById('email').value;
+            leadData.telefone = document.getElementById('telefone').value;
+            leadData.data = new Date().toLocaleString('pt-BR');
+
+            // Envia para o Google Sheets
+            try {
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(leadData)
+                });
+            } catch (error) {
+                console.log('Dados capturados:', leadData);
+            }
+
+            // Continua para o quiz
+            document.getElementById('leadFormPage').style.display = 'none';
+            document.getElementById('quizPage').style.display = 'flex';
+            updateProgress();
+        }
+
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                const question = this.closest('.question');
+                const questionNum = question.dataset.question;
+                const value = this.dataset.value;
+                
+                answers[`q${questionNum}`] = value;
+                
+                if (currentQuestion < totalQuestions) {
+                    question.classList.remove('active');
+                    currentQuestion++;
+                    document.querySelector(`[data-question="${currentQuestion}"]`).classList.add('active');
+                    updateProgress();
+                } else {
+                    showResult();
+                }
+            });
+        });
+
+        function updateProgress() {
+            const progress = (currentQuestion / totalQuestions) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        async function showResult() {
+            let resultType;
+
+            if (answers.q4 === 'sim') {
+                resultType = 'quimica';
+            } else {
+                resultType = answers.q1;
+            }
+
+            const result = results[resultType];
+            
+            // Salva o resultado junto com os dados do lead
+            const finalData = {
+                ...leadData,
+                resultado: result.title,
+                respostas: JSON.stringify(answers)
+            };
+
+            // Envia resultado completo para o Google Sheets
+            try {
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(finalData)
+                });
+            } catch (error) {
+                console.log('Dados finais:', finalData);
+            }
+            
+            document.getElementById('quizContainer').style.display = 'none';
+            document.querySelector('.progress-bar').style.display = 'none';
+            
+            const resultHTML = `
+                <div class="result active">
+                    <span class="emoji">${result.emoji}</span>
+                    <h2>${result.title}</h2>
+                    <p>${result.description}</p>
+                    <div class="tip">
+                        <strong>${result.tip}</strong>
+                    </div>
+                    <p style="margin-top: 25px;">👉 Siga <strong>@lojaoficialramonise</strong> para mais dicas exclusivas!</p>
+                    <a href="https://www.instagram.com/lojaoficialramonise?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="cta-button">✨ Seguir no Instagram</a>
+                </div>
+            `;
+            
+            document.getElementById('resultContainer').innerHTML = resultHTML;
+        }
+    </script>
+</body>
+</html>
