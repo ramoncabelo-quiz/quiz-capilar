@@ -592,35 +592,28 @@
             submitBtn.textContent = 'Enviando...';
 
             leadData.nome = document.getElementById('nome').value;
+            leadData.email = document.getElementById('email').value;
             leadData.telefone = document.getElementById('telefone').value;
             leadData.data = new Date().toLocaleString('pt-BR');
 
             // Envia para o Google Sheets
-            if (SCRIPT_URL !== 'COLE_AQUI_A_URL_DO_SEU_SCRIPT') {
-                try {
-                    const response = await fetch(SCRIPT_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'text/plain',
-                        },
-                        body: JSON.stringify(leadData)
-                    });
-                    console.log('Lead enviado com sucesso!');
-                } catch (error) {
-                    console.log('Erro ao enviar:', error);
-                    console.log('Dados capturados localmente:', leadData);
-                }
-            } else {
-                console.log('Configure a URL do script primeiro!');
-                console.log('Dados:', leadData);
+            try {
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(leadData)
+                });
+            } catch (error) {
+                console.log('Dados capturados:', leadData);
             }
 
             // Continua para o quiz
-            setTimeout(() => {
-                document.getElementById('leadFormPage').style.display = 'none';
-                document.getElementById('quizPage').style.display = 'flex';
-                updateProgress();
-            }, 500);
+            document.getElementById('leadFormPage').style.display = 'none';
+            document.getElementById('quizPage').style.display = 'flex';
+            updateProgress();
         }
 
         document.querySelectorAll('.option').forEach(option => {
@@ -666,23 +659,17 @@
             };
 
             // Envia resultado completo para o Google Sheets
-            if (SCRIPT_URL !== 'COLE_AQUI_A_URL_DO_SEU_SCRIPT') {
-                try {
-                    const response = await fetch(SCRIPT_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'text/plain',
-                        },
-                        body: JSON.stringify(finalData)
-                    });
-                    console.log('Resultado enviado com sucesso!');
-                } catch (error) {
-                    console.log('Erro ao enviar resultado:', error);
-                    console.log('Dados finais:', finalData);
-                }
-            } else {
-                console.log('Configure a URL do script!');
-                console.log('Dados completos:', finalData);
+            try {
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(finalData)
+                });
+            } catch (error) {
+                console.log('Dados finais:', finalData);
             }
             
             document.getElementById('quizContainer').style.display = 'none';
